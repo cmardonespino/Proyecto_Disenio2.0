@@ -1,3 +1,5 @@
+package com.example.carlosandres.turnpass.Modelo;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,7 +12,7 @@ import android.provider.BaseColumns;
 public class Turno extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Turno.db";
+    public static final String DATABASE_NAME = "com.example.carlosandres.turnpass.Modelo.Turno.db";
 
     /**************************** VARIABLES DEFINIDOS EN DIAGRAMA DE CLASES ************************/
     public static final String nombreTurno = "";
@@ -20,7 +22,7 @@ public class Turno extends SQLiteOpenHelper{
     public Turno(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION);}
 
     public static abstract class DatosTabla implements BaseColumns {
-        public static final String TABLE_NAME = "Turno";
+        public static final String TABLE_NAME = "com.example.carlosandres.turnpass.Modelo.Turno";
 
         /********************* VARIABLES DEFINIDOS EN EL MODELO RELACIONAL *************************/
         public static final String id_turno = "";

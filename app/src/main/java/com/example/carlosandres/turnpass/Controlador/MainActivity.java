@@ -1,11 +1,11 @@
-package com.example.carlosandres.turnpass;
+package com.example.carlosandres.turnpass.Controlador;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.ArrayList;
+import com.example.carlosandres.turnpass.R;
 
 /***************************** R E F E R E N C I A S *******************************/
 
