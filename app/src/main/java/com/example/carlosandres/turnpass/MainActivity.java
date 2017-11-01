@@ -1,7 +1,11 @@
 package com.example.carlosandres.turnpass;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+
+import java.util.ArrayList;
 
 /***************************** R E F E R E N C I A S *******************************/
 
@@ -21,5 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    
+    public void VistaLlenarTablas(View vistaLlenarTablas){
+        Intent intent = new Intent(this, LlenarTablas.class);
+        startActivity(intent);
+    }
 }
