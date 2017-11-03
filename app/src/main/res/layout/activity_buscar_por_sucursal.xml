@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/botonBuscar"
+        android:onClick="buscarSucursalYdesplegarInformacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -38,6 +39,7 @@
 
     <Spinner
         android:id="@+id/spinnerComuna"
+        android:entries="@array/comunas_array"
         android:layout_width="173dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

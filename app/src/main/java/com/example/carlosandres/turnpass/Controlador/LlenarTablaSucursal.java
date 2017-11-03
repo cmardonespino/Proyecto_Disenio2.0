@@ -55,6 +55,9 @@ public class LlenarTablaSucursal extends AppCompatActivity {
         discapacidad = (CheckBox) findViewById(R.id.checkBoxDiscapacidad);
 
         if (nomb.equals("") || dir.equals("") || mod.equals("") || serv.equals("")) {
+            comuna.setSelection(0);
+            modulos.setSelection(0);
+            servicio.setSelection(0);
             Toast.makeText(getApplicationContext(), "DEBE LLENAR TODOS LOS CAMPOS!", Toast.LENGTH_LONG).show();
             if(discapacidad.isChecked()){
                 discapacidad.setChecked(false);
@@ -65,6 +68,9 @@ public class LlenarTablaSucursal extends AppCompatActivity {
 
             if(rs.getInt(0)>0){
                 Toast.makeText(getApplicationContext(), "SUCURSAL YA ESTÁ REGISTRADA", Toast.LENGTH_LONG).show();
+                comuna.setSelection(0);
+                modulos.setSelection(0);
+                servicio.setSelection(0);
             }else {
                     // DISCAPACIDAD
                     // 1 = SI ES APTO PARA DISCAPACITADOS
@@ -96,6 +102,9 @@ public class LlenarTablaSucursal extends AppCompatActivity {
                     nombresucursal.setText("");
                     direccion.setText("");
                     discapacidad.setChecked(false);
+                    comuna.setSelection(0);
+                    modulos.setSelection(0);
+                    servicio.setSelection(0);
             }
         }
     }
