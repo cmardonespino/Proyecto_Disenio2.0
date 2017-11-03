@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controlador.LlenarTablaSucursal"></activity>
+        <activity android:name=".Controlador.LlenarTablaSucursal" />
+        <activity android:name=".Controlador.Opciones" />
+        <activity android:name=".Controlador.BuscarPorSucursal"></activity>
     </application>
 
 </manifest>

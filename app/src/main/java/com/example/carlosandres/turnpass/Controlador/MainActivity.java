@@ -48,9 +48,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onClickBtn(View v){
+    public void agregarSucursal(View v){
 
         Intent intent = new Intent(this, LlenarTablaSucursal.class);
+        intent.putStringArrayListExtra("test", null);
+        startActivity(intent);
+    }
+
+    public void buscarSucursal(View v){
+
+        Intent intent = new Intent(this, Opciones.class);
         intent.putStringArrayListExtra("test", null);
         startActivity(intent);
     }
