@@ -66,7 +66,6 @@ public class LlenarTablaSucursal extends AppCompatActivity {
             if(rs.getInt(0)>0){
                 Toast.makeText(getApplicationContext(), "SUCURSAL YA ESTÁ REGISTRADA", Toast.LENGTH_LONG).show();
             }else {
-                
                     // DISCAPACIDAD
                     // 1 = SI ES APTO PARA DISCAPACITADOS
                     // 0 = NO ES APTO PARA DISCAPACITADOS

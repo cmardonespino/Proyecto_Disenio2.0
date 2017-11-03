@@ -42,11 +42,13 @@ public class Opciones extends AppCompatActivity {
                 busquedaSucursal.setChecked(false);
             }else{
                 if(busquedaServicio.isChecked()){
-                    Toast.makeText(getApplicationContext(), "OPCIONES EN DESARROLLO", Toast.LENGTH_LONG).show();
                     busquedaServicio.setChecked(false);
-                }else if(busquedaUbicacion.isChecked()){
                     Toast.makeText(getApplicationContext(), "OPCIONES EN DESARROLLO", Toast.LENGTH_LONG).show();
+                }else if(busquedaUbicacion.isChecked()){
                     busquedaUbicacion.setChecked(false);
+                    Toast.makeText(getApplicationContext(), "OPCIONES EN DESARROLLO", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "DEBE ESCOGER UNA OPCION", Toast.LENGTH_LONG).show();
                 }
 
             }
