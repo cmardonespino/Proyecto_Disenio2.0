@@ -2,10 +2,12 @@ package com.example.carlosandres.turnpass.Modelo;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +17,11 @@ import java.util.List;
 
 public class Sucursal extends SQLiteOpenHelper {
 
+    
+
+    /***********************************************************************************************/
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Sucursal.db";
-    /***********************************************************************************************/
-
     public static final String TABLE_NAME = "Sucursal";
     /********************* VARIABLES DEFINIDOS EN EL MODELO RELACIONAL *************************/
     public static final String COLUM_SUCURSAL_ID = "ID";
@@ -35,6 +38,9 @@ public class Sucursal extends SQLiteOpenHelper {
     public static final String BORRAR_TABLA =
             "DROP TABLE IF EXISTS "+TABLE_NAME;
 
+    public static final String CONSULTAR_SUCURSAL_SI_EXISTE =
+            "SELECT COUNT(*) FROM "+TABLE_NAME + " WHERE "+ COLUM_SUCURSAL_NOMBRE +" = '";
+
 
     public Sucursal(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,5 +56,9 @@ public class Sucursal extends SQLiteOpenHelper {
         //onUpgrade(sqLiteDatabase, i, i1);
         db.execSQL(BORRAR_TABLA);
         onCreate(db);
+    }
+
+    public Cursor verificarSiExisteSucursal(SQLiteDatabase db, String nombre){
+        return db.rawQuery(CONSULTAR_SUCURSAL_SI_EXISTE+nombre+"'", null);
     }
 }
