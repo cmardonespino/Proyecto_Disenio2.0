@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, Opciones.class);
         intent.putStringArrayListExtra("test", null);
-        startActivity(intent);
+        Sucursal s = new Sucursal(this);
+        SQLiteDatabase db = s.getWritableDatabase();
+        if(s.verificarSiExistenDatosBaseDeDatos(db)==true){
+            startActivity(intent);
+        }else
+            Toast.makeText(getApplicationContext(), "NO EXISTEN DATOS EN LA BASE DE DATOS", Toast.LENGTH_LONG).show();
     }
 }
