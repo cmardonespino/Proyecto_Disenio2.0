@@ -49,8 +49,7 @@ public class BuscarPorSucursal extends AppCompatActivity {
             comuna_nombre = comuna.getSelectedItem().toString();
             direccion_nombre = direccion.getText().toString();
 
-            /*Toast.makeText(getApplicationContext(), "DIRECCION: "+direccion_nombre+" COMUNA: "+
-                    comuna_nombre, Toast.LENGTH_LONG).show();*/
+            Toast.makeText(getApplicationContext(), "DIRECCION: "+direccion_nombre+" COMUNA: "+comuna_nombre, Toast.LENGTH_LONG).show();
 
             if(s.verificarSiExisteSucursal(db, direccion_nombre, comuna_nombre).getCount()==0){
                 Toast.makeText(getApplicationContext(), "NO EXISTE SUCURSAL DE ACUERDO A LOS DATOS INGRESADOS",

@@ -57,15 +57,34 @@ public class MainActivity extends AppCompatActivity {
 
         if(BaseDeDatos.doesDatabaseExist(this, BaseDeDatos.DATABASE_NAME)==false){
             basededatos = bdd.getWritableDatabase();
+
             ContentValues values = new ContentValues();
-            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 0);
+            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 10);
             values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_NOMBRE, "Pasaporte");
             basededatos.insert(BaseDeDatos.Servicio.TABLE_NAME, null, values);
             values.clear();
 
-            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 1);
+            basededatos = bdd.getWritableDatabase();
+            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 11);
             values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_NOMBRE, "Carnet");
             basededatos.insert(BaseDeDatos.Servicio.TABLE_NAME, null, values);
+            values.clear();
+
+            basededatos = bdd.getWritableDatabase();
+            values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NIVELPRIORIDAD, "2");
+            values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NOMBRE, "Fisica");
+            basededatos.insert(BaseDeDatos.Discapacidad.TABLE_NAME, null, values);
+            values.clear();
+
+            values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NIVELPRIORIDAD, "1");
+            values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NOMBRE, "Sensorial");
+            basededatos.insert(BaseDeDatos.Discapacidad.TABLE_NAME, null, values);
+            values.clear();
+
+            values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NIVELPRIORIDAD, "0");
+            values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NOMBRE, "Ninguna");
+            basededatos.insert(BaseDeDatos.Discapacidad.TABLE_NAME, null, values);
+            values.clear();
         }
 
         super.onCreate(savedInstanceState);

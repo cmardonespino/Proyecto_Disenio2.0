@@ -22,9 +22,8 @@ import com.example.carlosandres.turnpass.R;
 public class LlenarTablaSucursal extends AppCompatActivity {
 
     EditText nombresucursal, direccion;
-    Spinner comuna, modulos, servicio;
-    CheckBox discapacidad;
-    String nomb, dir, comu, mod, serv;
+    Spinner comuna, modulos, servicio, discapacidad;
+    String nomb, dir, comu, mod, serv, disca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +54,14 @@ public class LlenarTablaSucursal extends AppCompatActivity {
         servicio = (Spinner) findViewById(R.id.spinnerServicio);
         serv = servicio.getSelectedItem().toString();
 
-        discapacidad = (CheckBox) findViewById(R.id.checkBoxDiscapacidad);
+        discapacidad = (Spinner) findViewById(R.id.spinnerDiscapacidad);
 
         if (nomb.equals("") || dir.equals("") || mod.equals("") || serv.equals("")) {
             comuna.setSelection(0);
             modulos.setSelection(0);
             servicio.setSelection(0);
             Toast.makeText(getApplicationContext(), "DEBE LLENAR TODOS LOS CAMPOS!", Toast.LENGTH_LONG).show();
-            if(discapacidad.isChecked()){
-                discapacidad.setChecked(false);
-            }
+            discapacidad.setSelection(0);
         }else{
             //Cursor rs = s.verificarSiExisteSucursal(db, nomb, dir);
             //rs.moveToFirst();
@@ -81,23 +78,29 @@ public class LlenarTablaSucursal extends AppCompatActivity {
                     // 1 = SI ES APTO PARA DISCAPACITADOS
                     // 0 = NO ES APTO PARA DISCAPACITADOS
 
-                    if (discapacidad.isChecked()) {
+                    if (discapacidad.getSelectedItem().toString().equals("Fisica")) {
                         values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDDISCAPACIDAD, "1");
-                    } else
-                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDDISCAPACIDAD, "0");
+                    } else if(discapacidad.getSelectedItem().toString().equals("Sensorial"))
+                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDDISCAPACIDAD, "2");
+                    else{
+                        if(discapacidad.getSelectedItem().toString().equals("Ninguna")){
+                            values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDDISCAPACIDAD, "3");
+                        }
+                    }
 
                     //values.put(Sucursal.COLUM_SUCURSAL_ID, 2); ESTA LINEA SE AGREGA SOLA CON LA ID INCREMENTADA.
 
                     // SERVICIO CARNET ID: 10
                     // SERVICIO PASAPORTE ID: 11
                     if (serv.equals("Pasaporte")) {
-                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDSERVICIO, "11");
-                    } else if (serv.equals("Carnet")) {
                         values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDSERVICIO, "10");
+                    } else if (serv.equals("Carnet")) {
+                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDSERVICIO, "11");
                     }
                     values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_DIRECCION, dir);
                     values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_COMUNA, comu);
                     values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_NOMBRE, nomb);
+                    values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_MODULOS, mod);
 
                     if (db.insert(BaseDeDatos.Sucursal.TABLE_NAME, null, values) == -1)
                         Toast.makeText(getApplicationContext(), "SUCURSAL YA EXISTE", Toast.LENGTH_LONG).show();
@@ -107,7 +110,7 @@ public class LlenarTablaSucursal extends AppCompatActivity {
 
                     nombresucursal.setText("");
                     direccion.setText("");
-                    discapacidad.setChecked(false);
+                    discapacidad.setSelection(0);
                     comuna.setSelection(0);
                     modulos.setSelection(0);
                     servicio.setSelection(0);

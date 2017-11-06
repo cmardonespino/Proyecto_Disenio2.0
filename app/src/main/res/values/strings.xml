@@ -24,4 +24,10 @@
         <item>Pasaporte</item>
     </string-array>
 
+    <string-array name="discapacidad_array">
+        <item>Ninguna</item>
+        <item>Fisica</item>
+        <item>Sensorial</item>
+    </string-array>
+
 </resources>

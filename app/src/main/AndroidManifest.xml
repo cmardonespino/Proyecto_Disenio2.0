@@ -19,7 +19,8 @@
         <activity android:name=".Controlador.LlenarTablaSucursal" />
         <activity android:name=".Controlador.Opciones" />
         <activity android:name=".Controlador.BuscarPorSucursal" />
-        <activity android:name=".Controlador.DesplegarInformacion"></activity>
+        <activity android:name=".Controlador.DesplegarInformacion" />
+        <activity android:name=".Controlador.MostrarTurnoTomado"></activity>
     </application>
 
 </manifest>

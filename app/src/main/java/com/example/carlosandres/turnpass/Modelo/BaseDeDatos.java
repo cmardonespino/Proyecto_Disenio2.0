@@ -58,8 +58,9 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         /********************* VARIABLES DEFINIDOS EN EL MODELO RELACIONAL *************************/
         public static final String COLUM_SUCURSAL_ID = "ID_SUCURSAL";
         public static final String COLUM_SUCURSAL_IDSERVICIO = "ID_SERVICIO";
-        public static final String COLUM_SUCURSAL_NOMBRE = "NOMBRE_SUCURSAL";
+        public static final String COLUM_SUCURSAL_MODULOS = "CANTIDAD_MODULOS";
         public static final String COLUM_SUCURSAL_IDDISCAPACIDAD = "ID_DISCAPACIDAD";
+        public static final String COLUM_SUCURSAL_NOMBRE = "NOMBRE_SUCURSAL";
         public static final String COLUM_SUCURSAL_DIRECCION = "DIRECCION";
         public static final String COLUM_SUCURSAL_COMUNA = "COMUNA";
         /*******************************************************************************************/
@@ -68,7 +69,8 @@ public class BaseDeDatos extends SQLiteOpenHelper {
 
         public static final String CREAR_TABLA =
                 "CREATE TABLE " + TABLE_NAME + "(" + COLUM_SUCURSAL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUM_SUCURSAL_IDSERVICIO + " VARCHAR, " + COLUM_SUCURSAL_IDDISCAPACIDAD + " VARCHAR, " +
+                        COLUM_SUCURSAL_IDSERVICIO + " VARCHAR, " + COLUM_SUCURSAL_MODULOS+" VARCHAR, "+
+                        COLUM_SUCURSAL_IDDISCAPACIDAD + " VARCHAR, " +
                         COLUM_SUCURSAL_NOMBRE + " VARCHAR, " + COLUM_SUCURSAL_DIRECCION + " VARCHAR, " +
                         COLUM_SUCURSAL_COMUNA + " VARCHAR)";
         public static final String BORRAR_TABLA =
@@ -108,12 +110,45 @@ public class BaseDeDatos extends SQLiteOpenHelper {
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
 
+    public static class Discapacidad implements BaseColumns {
+
+        /***********************************************************************************************/
+        public static final String TABLE_NAME = "Discapacidad";
+
+        /********************* VARIABLES DEFINIDOS EN DIAGRAMA DE CLASES ***************************/
+        public static final String COLUM_DISCAPACIDAD_ID = "ID";
+        public static final String COLUM_DISCAPACIDAD_NOMBRE = "NOMBRE_DISCAPACIDAD";
+        public static final String COLUM_DISCAPACIDAD_NIVELPRIORIDAD = "NIVEL_PRIORIDAD";
+        /************************************************************************************************/
+
+        public static final String CREAR_TABLA =
+                "CREATE TABLE " + TABLE_NAME + "(" + COLUM_DISCAPACIDAD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUM_DISCAPACIDAD_NOMBRE + " VARCHAR, " + COLUM_DISCAPACIDAD_NIVELPRIORIDAD + " VARCHAR)";
+
+        public static final String BORRAR_TABLA =
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
+
+    public static class Modulo implements BaseColumns {
+
+        /***********************************************************************************************/
+        public static final String TABLE_NAME = "Modulo";
+
+        /********************* VARIABLES DEFINIDOS EN DIAGRAMA DE CLASES ***************************/
+        public static final String COLUM_MODULO_ID = "ID";
+        public static final String COLUM_DISCAPACIDAD_NOMBRE = "NOMBRE_DISCAPACIDAD";
+        public static final String COLUM_DISCAPACIDAD_NIVELPRIORIDAD = "NIVEL_PRIORIDAD";
+        /************************************************************************************************/
+
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Sucursal.CREAR_TABLA);
         db.execSQL(Servicio.CREAR_TABLA);
         db.execSQL(Turno.CREAR_TABLA);
         db.execSQL(Usuario.CREAR_TABLA);
+        db.execSQL(Discapacidad.CREAR_TABLA);
     }
 
     @Override
