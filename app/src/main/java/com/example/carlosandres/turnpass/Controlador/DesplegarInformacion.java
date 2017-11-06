@@ -6,22 +6,26 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.carlosandres.turnpass.Modelo.BaseDeDatos;
+import com.example.carlosandres.turnpass.Modelo.Servicio;
 import com.example.carlosandres.turnpass.Modelo.Sucursal;
 import com.example.carlosandres.turnpass.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class DesplegarInformacion extends AppCompatActivity {
 
     List<String> datosIngresados;
-    TableLayout mostrarDatos;
+    LinearLayout mostrarDatos;
     TableRow rowHeader, row1, row2, row3, row4;
 
     @Override
@@ -39,14 +43,40 @@ public class DesplegarInformacion extends AppCompatActivity {
 
         datosIngresados = getIntent().getStringArrayListExtra("test");
 
-        Toast.makeText(getApplicationContext(), datosIngresados.get(0)+" "+datosIngresados.get(1),Toast.LENGTH_LONG).show();
-        Cursor rs = s.mostrarDatosSucursal(db, datosIngresados.get(0), datosIngresados.get(1));
+        //Toast.makeText(getApplicationContext(), datosIngresados.get(0)+" "+datosIngresados.get(1),Toast.LENGTH_LONG).show();
+        //Cursor rs = s.mostrarDatosSucursal(db, datosIngresados.get(0), datosIngresados.get(1));
+        ArrayList<Sucursal> sucursal = new ArrayList<Sucursal>();
+        sucursal = s.capturarDatos(db, datosIngresados.get(1), datosIngresados.get(0));
+        if(sucursal.isEmpty()){
+            Toast.makeText(getApplicationContext(), "PROBLEMAS AL CAPTURAR DATOS", Toast.LENGTH_LONG).show();
+        }else{
+            //Toast.makeText(getApplicationContext(), "NO SE QUE HUEA "+sucursal.get(0).getNombre_sucursal(), Toast.LENGTH_LONG).show();
+            TextView a = (TextView)findViewById(R.id.nombreSucursal);
+            a.setText(sucursal.get(0).getNombre_sucursal());
 
+
+            TextView b = (TextView)findViewById(R.id.servicioSucursal);
+            Servicio s1 = new Servicio();
+            ArrayList<Servicio> b1 = new ArrayList<Servicio>();
+            b1 = s1.consultarServicio(db, sucursal.get(0).getServicio());
+            //b.setText(b1.get(0).getNombre_servicio());
+            b.setText();
+
+
+            TextView c = (TextView)findViewById(R.id.direccionSucursal);
+            c.setText(sucursal.get(0).getDireccion());
+            TextView d = (TextView)findViewById(R.id.comunaSucursal);
+            d.setText(sucursal.get(0).getComuna());
+            TextView e = (TextView)findViewById(R.id.discapacidadSucursal);
+            e.setText(sucursal.get(0).getDiscapacidad());
+            //String cabecera[] = {"Nombre Sucursal", "Servicio", "Dirección", "Discapacidad", "Seleccionar"};
+        }
+/*
         if(rs.moveToFirst()){
             do{
                 int columna = rs.getColumnCount();
                 for(int i =0;i<columna;++i){
-                    if(i%6==0){
+                    if(i%5==0){
                         sb.append(" / ");
                     }
                     sb.append(rs.getString(i));
@@ -57,7 +87,7 @@ public class DesplegarInformacion extends AppCompatActivity {
             }while(rs.moveToNext());
             Toast.makeText(getApplicationContext(), sb.toString(), Toast.LENGTH_LONG).show();
         }
-        rs.close();
+        rs.close();*/
 
         //setContentView(R.layout.activity_desplegar_informacion);
         //datosIngresados = getIntent().getStringArrayListExtra("test");
@@ -81,7 +111,12 @@ public class DesplegarInformacion extends AppCompatActivity {
     public void funcion(View v){
         //Toast.makeText(getApplicationContext(), datosIngresados.get(0)+" "+datosIngresados.get(1), Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(), rs.moveToFirst(),Toast.LENGTH_LONG).show();
-
+        CheckBox f = (CheckBox)findViewById(R.id.checkBoxSeleccionar);
+        if(f.isChecked()){
+            Toast.makeText(getApplicationContext(),"TURNO TOMADO", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "DEBE SELECCIONAR UNA SUCURSAL PARA SOLICITAR TURNO", Toast.LENGTH_LONG).show();
+        }
         /*
         if(rs.moveToFirst()){
             do{

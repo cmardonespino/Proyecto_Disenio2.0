@@ -37,16 +37,19 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/linearLayoutMostrarDatos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/linearLayoutMostrarDatosEspecificos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="110dp"
+                        android:id="@+id/primero"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Nombre Sucursal"/>
@@ -81,32 +84,37 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/nombreSucursal1"
+                        android:id="@+id/nombreSucursal"
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text=""/>
                     <TextView
+                        android:id="@+id/direccionSucursal"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text=""/>
                     <TextView
+                        android:id="@+id/servicioSucursal"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text=""/>
                     <TextView
+                        android:id="@+id/comunaSucursal"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text=""/>
                     <TextView
+                        android:id="@+id/discapacidadSucursal"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text=""/>
                     <CheckBox
+                        android:id="@+id/checkBoxSeleccionar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"/>

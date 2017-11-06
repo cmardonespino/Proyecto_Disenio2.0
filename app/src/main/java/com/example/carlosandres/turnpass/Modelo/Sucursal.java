@@ -19,15 +19,59 @@ import java.util.List;
 public class Sucursal{
 
     String nombre_sucursal="";
-    int servicio=-1;
+    String servicio="";
     String direccion="";
-    boolean discapacidad=false;
+    String discapacidad="";
+    String comuna ="";
 
-    public Sucursal(String nombre_sucursal, int servicio, String direccion, boolean discapacidad){
+    public Sucursal(){}
+
+    public Sucursal(String nombre_sucursal, String servicio, String direccion, String comuna, String discapacidad){
         this.nombre_sucursal=nombre_sucursal;
         this.servicio=servicio;
         this.direccion=direccion;
         this.discapacidad=discapacidad;
+        this.comuna=comuna;
+    }
+
+    public String getComuna() {
+        return comuna;
+    }
+
+    public void setComuna(String comuna) {
+        this.comuna = comuna;
+    }
+
+    public String getNombre_sucursal() {
+        return nombre_sucursal;
+    }
+
+    public void setNombre_sucursal(String nombre_sucursal) {
+        this.nombre_sucursal = nombre_sucursal;
+    }
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(String discapacidad) {
+        this.discapacidad = discapacidad;
     }
 
     public Cursor verificarSiExisteSucursal(SQLiteDatabase db, String nomb, String dir, String comu){
@@ -47,12 +91,12 @@ public class Sucursal{
                 comuna+"'", null);
     }
 
-    public ArrayList<Sucursal> capturarDatos(SQLiteDatabase db, String dirccion, String comuna){
+    public ArrayList<Sucursal> capturarDatos(SQLiteDatabase db, String direccion, String comuna){
         ArrayList<Sucursal> sucursal = new ArrayList<Sucursal>();
         Cursor rs = db.rawQuery("SELECT * FROM Sucursal WHERE DIRECCION='"+direccion+"' AND COMUNA='"+comuna+"'", null);
         if(rs.moveToFirst()){
             do{
-                sucursal.add(new Sucursal);
+                sucursal.add(new Sucursal(rs.getString(3), rs.getString(1), rs.getString(4), rs.getString(5), rs.getString(2)));
             }while(rs.moveToNext());
         }
         return sucursal;

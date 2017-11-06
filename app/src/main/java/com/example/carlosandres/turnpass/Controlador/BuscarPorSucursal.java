@@ -56,7 +56,7 @@ public class BuscarPorSucursal extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "NO EXISTE SUCURSAL DE ACUERDO A LOS DATOS INGRESADOS",
                         Toast.LENGTH_LONG).show();
             }else{
-                Toast.makeText(getApplicationContext(), "SI COINCIDEN DATOS", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "SI COINCIDEN DATOS", Toast.LENGTH_LONG).show();
                 List<String> datosIngresados;
                 datosIngresados = new ArrayList<String>();
                 datosIngresados.add(comuna_nombre);
