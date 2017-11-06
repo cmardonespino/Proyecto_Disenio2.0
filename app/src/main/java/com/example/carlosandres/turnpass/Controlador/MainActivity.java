@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.carlosandres.turnpass.Modelo.BaseDeDatos;
+import com.example.carlosandres.turnpass.Modelo.Servicio;
 import com.example.carlosandres.turnpass.Modelo.Sucursal;
 import com.example.carlosandres.turnpass.R;
 
@@ -41,10 +43,34 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    BaseDeDatos bdd;
+    SQLiteDatabase basededatos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        /*values.put(Servicio.FeedEntry.COLUM_SERVICIO_IDSUCURSAL, "2");
+        values.put(Servicio.FeedEntry.COLUM_SERVICIO_IDTURNO, "2");
+        values.put(Servicio.FeedEntry.COLUM_SERVICIO_NOMBRE, "Carnet");
+        dbServicio.insert(Sucursal.FeedEntry.TABLE_NAME, null, values);*/
+        bdd = new BaseDeDatos(this);
+
+        if(BaseDeDatos.doesDatabaseExist(this, BaseDeDatos.DATABASE_NAME)==false){
+            basededatos = bdd.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 0);
+            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_NOMBRE, "Pasaporte");
+            basededatos.insert(BaseDeDatos.Servicio.TABLE_NAME, null, values);
+            values.clear();
+
+            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 1);
+            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_NOMBRE, "Carnet");
+            basededatos.insert(BaseDeDatos.Servicio.TABLE_NAME, null, values);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
 
@@ -59,9 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, Opciones.class);
         intent.putStringArrayListExtra("test", null);
-        Sucursal s = new Sucursal(this);
-        SQLiteDatabase db = s.getWritableDatabase();
-        if(s.verificarSiExistenDatosBaseDeDatos(db)==true){
+
+        if(bdd.verificarSiExistenDatosBaseDeDatos(basededatos)==true){
             startActivity(intent);
         }else
             Toast.makeText(getApplicationContext(), "NO EXISTEN DATOS EN LA BASE DE DATOS", Toast.LENGTH_LONG).show();

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.carlosandres.turnpass.Modelo.BaseDeDatos;
 import com.example.carlosandres.turnpass.Modelo.Sucursal;
 import com.example.carlosandres.turnpass.R;
 
@@ -32,9 +34,10 @@ public class LlenarTablaSucursal extends AppCompatActivity {
 
     public void agregarSucursal(View v){
 
-        Sucursal s = new Sucursal(this);
-        SQLiteDatabase db = s.getWritableDatabase();
-        SQLiteDatabase db1 = s.getReadableDatabase();
+        BaseDeDatos bdd = new BaseDeDatos(this);
+        //Sucursal s = new Sucursal(this);
+        SQLiteDatabase db = bdd.getWritableDatabase();
+        SQLiteDatabase db1 = bdd.getReadableDatabase();
         ContentValues values = new ContentValues();
 
         nombresucursal = (EditText)findViewById(R.id.editTextNombreSucursal);
@@ -63,11 +66,12 @@ public class LlenarTablaSucursal extends AppCompatActivity {
                 discapacidad.setChecked(false);
             }
         }else{
-            Cursor rs = s.verificarSiExisteSucursal(db, nomb);
-            rs.moveToFirst();
-
-            if(rs.getInt(0)>0){
+            //Cursor rs = s.verificarSiExisteSucursal(db, nomb, dir);
+            //rs.moveToFirst();
+            if(bdd.verificarSiExisteSucursal(db, nomb, dir, comu).getCount()>0){
                 Toast.makeText(getApplicationContext(), "SUCURSAL YA ESTÁ REGISTRADA", Toast.LENGTH_LONG).show();
+                nombresucursal.setText("");
+                direccion.setText("");
                 comuna.setSelection(0);
                 modulos.setSelection(0);
                 servicio.setSelection(0);
@@ -77,23 +81,24 @@ public class LlenarTablaSucursal extends AppCompatActivity {
                     // 0 = NO ES APTO PARA DISCAPACITADOS
 
                     if (discapacidad.isChecked()) {
-                        values.put(Sucursal.FeedEntry.COLUM_SUCURSAL_IDDISCAPACIDAD, "1");
+                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDDISCAPACIDAD, "1");
                     } else
-                        values.put(Sucursal.FeedEntry.COLUM_SUCURSAL_IDDISCAPACIDAD, "0");
+                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDDISCAPACIDAD, "0");
 
                     //values.put(Sucursal.COLUM_SUCURSAL_ID, 2); ESTA LINEA SE AGREGA SOLA CON LA ID INCREMENTADA.
 
                     // SERVICIO CARNET ID: 10
                     // SERVICIO PASAPORTE ID: 11
                     if (serv.equals("Pasaporte")) {
-                        values.put(Sucursal.FeedEntry.COLUM_SUCURSAL_IDSERVICIO, "11");
+                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDSERVICIO, "11");
                     } else if (serv.equals("Carnet")) {
-                        values.put(Sucursal.FeedEntry.COLUM_SUCURSAL_IDSERVICIO, "10");
+                        values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_IDSERVICIO, "10");
                     }
-                    values.put(Sucursal.FeedEntry.COLUM_SUCURSAL_IDDIRECCION, "0");
-                    values.put(Sucursal.FeedEntry.COLUM_SUCURSAL_NOMBRE, nomb);
+                    values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_DIRECCION, dir);
+                    values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_COMUNA, comu);
+                    values.put(BaseDeDatos.Sucursal.COLUM_SUCURSAL_NOMBRE, nomb);
 
-                    if (db.insert(Sucursal.FeedEntry.TABLE_NAME, null, values) == -1)
+                    if (db.insert(BaseDeDatos.Sucursal.TABLE_NAME, null, values) == -1)
                         Toast.makeText(getApplicationContext(), "SUCURSAL YA EXISTE", Toast.LENGTH_LONG).show();
                     else
                         Toast.makeText(getApplicationContext(), "SUCURSAL INGRESADA AL SISTEMA CORRECTAMENTE", Toast.LENGTH_LONG).show();
