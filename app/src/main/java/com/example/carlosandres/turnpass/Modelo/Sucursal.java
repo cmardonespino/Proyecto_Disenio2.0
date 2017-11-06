@@ -16,14 +16,19 @@ import java.util.List;
  * Created by CarlosAndres on 01-11-2017.
  */
 
-public class Sucursal {
+public class Sucursal{
 
     String nombre_sucursal="";
     int servicio=-1;
     String direccion="";
-    boolean dispaciad=false;
+    boolean discapacidad=false;
 
-    public Sucursal(){}
+    public Sucursal(String nombre_sucursal, int servicio, String direccion, boolean discapacidad){
+        this.nombre_sucursal=nombre_sucursal;
+        this.servicio=servicio;
+        this.direccion=direccion;
+        this.discapacidad=discapacidad;
+    }
 
     public Cursor verificarSiExisteSucursal(SQLiteDatabase db, String nomb, String dir, String comu){
         return db.rawQuery("SELECT * FROM "+ BaseDeDatos.Sucursal.TABLE_NAME+ " WHERE NOMBRE_SUCURSAL = '"+nomb+"' AND DIRECCION='"+
@@ -40,6 +45,17 @@ public class Sucursal {
     public Cursor mostrarDatosSucursal(SQLiteDatabase db, String comuna, String direccion){
         return db.rawQuery(BaseDeDatos.Sucursal.MOSTRAR_DATOS_TABLA+direccion+"' AND COMUNA='"+
                 comuna+"'", null);
+    }
+
+    public ArrayList<Sucursal> capturarDatos(SQLiteDatabase db, String dirccion, String comuna){
+        ArrayList<Sucursal> sucursal = new ArrayList<Sucursal>();
+        Cursor rs = db.rawQuery("SELECT * FROM Sucursal WHERE DIRECCION='"+direccion+"' AND COMUNA='"+comuna+"'", null);
+        if(rs.moveToFirst()){
+            do{
+                sucursal.add(new Sucursal);
+            }while(rs.moveToNext());
+        }
+        return sucursal;
     }
 
 }
