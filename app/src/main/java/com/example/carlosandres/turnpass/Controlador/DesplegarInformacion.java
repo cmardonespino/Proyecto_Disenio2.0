@@ -34,10 +34,12 @@ public class DesplegarInformacion extends AppCompatActivity {
     }
 
     public void funcion(View v){
-        //Sucursal s = new Sucursal(this);
+        Sucursal s = new Sucursal();
         BaseDeDatos bdd = new BaseDeDatos(this);
         SQLiteDatabase db = bdd.getWritableDatabase();
-        Cursor rs = bdd.mostrarDatos(db, datosIngresados.get(0), datosIngresados.get(1));
+        //Toast.makeText(getApplicationContext(), datosIngresados.get(0)+" "+datosIngresados.get(1), Toast.LENGTH_LONG).show();
+        Cursor rs = s.mostrarDatosSucursal(db, datosIngresados.get(0), datosIngresados.get(1));
+        //Toast.makeText(getApplicationContext(), rs.moveToFirst(),Toast.LENGTH_LONG).show();
         String str = "";
         StringBuilder sb = new StringBuilder();
         ContentValues cv = new ContentValues();

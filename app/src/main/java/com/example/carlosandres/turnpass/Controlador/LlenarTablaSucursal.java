@@ -68,7 +68,8 @@ public class LlenarTablaSucursal extends AppCompatActivity {
         }else{
             //Cursor rs = s.verificarSiExisteSucursal(db, nomb, dir);
             //rs.moveToFirst();
-            if(bdd.verificarSiExisteSucursal(db, nomb, dir, comu).getCount()>0){
+            Sucursal sucursal = new Sucursal();
+            if(sucursal.verificarSiExisteSucursal(db, nomb, dir, comu).getCount()>0){
                 Toast.makeText(getApplicationContext(), "SUCURSAL YA ESTÁ REGISTRADA", Toast.LENGTH_LONG).show();
                 nombresucursal.setText("");
                 direccion.setText("");

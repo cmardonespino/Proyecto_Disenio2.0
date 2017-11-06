@@ -78,7 +78,34 @@ public class BaseDeDatos extends SQLiteOpenHelper {
                 "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + COLUM_SUCURSAL_NOMBRE + " = '";
 
         public static final String MOSTRAR_DATOS_TABLA =
-                "SELECT * FROM "+TABLE_NAME+" WHERE NOMBRE_SUCURSAL = '";
+                "SELECT * FROM "+TABLE_NAME+" WHERE DIRECCION = '";
+    }
+
+    public static class Usuario implements BaseColumns {
+
+        /***********************************************************************************************/
+        public static final String TABLE_NAME = "Usuario";
+
+        /********************* VARIABLES DEFINIDOS EN DIAGRAMA DE CLASES ***************************/
+        public static final String COLUM_USUARIO_ID = "ID";
+        public static final String COLUM_USUARIO_NOMBRECOMPLETO = "NOMBRE_COMPLETO";
+        public static final String COLUM_USUARIO_EDAD = "EDAD";
+        public static final String COLUM_USUARIO_NOMBREDEUSUARIO = "NOMBRE_USUARIO";
+        public static final String COLUM_USUARIO_CONTRASENIA = "CONTRASENIA";
+        public static final String COLUM_USUARIO_TELEFONO = "TELEFONO";
+        public static final String COLUM_USUARIO_DISCAPACIDAD = "ID_DISCAPACIDAD";
+        public static final String COLUM_USUARIO_IDTURNO = "ID_TURNO";
+        /************************************************************************************************/
+
+        public static final String CREAR_TABLA =
+                "CREATE TABLE " + TABLE_NAME + "(" + COLUM_USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUM_USUARIO_NOMBRECOMPLETO + " VARCHAR, " + COLUM_USUARIO_EDAD + " INTEGER, " +
+                        COLUM_USUARIO_NOMBREDEUSUARIO + " VARCHAR, " + COLUM_USUARIO_CONTRASENIA + " VARCHAR, " +
+                        COLUM_USUARIO_TELEFONO + " VARCHAR, "+COLUM_USUARIO_DISCAPACIDAD+" VARCHAR, "+
+                        COLUM_USUARIO_IDTURNO+" VARCHAR)";
+
+        public static final String BORRAR_TABLA =
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
 
     @Override
@@ -86,6 +113,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         db.execSQL(Sucursal.CREAR_TABLA);
         db.execSQL(Servicio.CREAR_TABLA);
         db.execSQL(Turno.CREAR_TABLA);
+        db.execSQL(Usuario.CREAR_TABLA);
     }
 
     @Override
@@ -93,21 +121,11 @@ public class BaseDeDatos extends SQLiteOpenHelper {
 
     }
 
-    public Cursor verificarSiExisteSucursal(SQLiteDatabase db, String dir, String comu){
-        return db.rawQuery("SELECT * FROM "+ Sucursal.TABLE_NAME+ " WHERE DIRECCION = '"+dir+"' AND COMUNA='"+
-                        comu+"'",
-                null);
-    }
-
-    public Cursor verificarSiExisteSucursal(SQLiteDatabase db, String nomb, String dir, String comu){
-        return db.rawQuery("SELECT * FROM "+ Sucursal.TABLE_NAME+ " WHERE NOMBRE_SUCURSAL = '"+nomb+"' AND DIRECCION='"+
-                        dir+"' AND COMUNA = '"+comu+"'",
-                null);
-    }
-
-    public Cursor mostrarDatos(SQLiteDatabase db, String nombre, String direccion){
-        return db.rawQuery(Sucursal.MOSTRAR_DATOS_TABLA+nombre+"'", null);
-    }
+    /*
+    public Cursor mostrarDatos(SQLiteDatabase db, String comuna, String direccion){
+        return db.rawQuery(Sucursal.MOSTRAR_DATOS_TABLA+direccion+"' AND COMUNA='"+
+                comuna+"'", null);
+    }*/
 
     public boolean verificarSiExistenDatosBaseDeDatos(SQLiteDatabase db){
         try{
@@ -119,6 +137,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         }
     }
 
+    /* https://stackoverflow.com/questions/3386667/query-if-android-database-exists */
     public static boolean doesDatabaseExist(Context context, String dbName) {
         File dbFile = context.getDatabasePath(dbName);
         return dbFile.exists();

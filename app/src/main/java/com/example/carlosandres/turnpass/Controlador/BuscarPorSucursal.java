@@ -44,7 +44,7 @@ public class BuscarPorSucursal extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "DEBE LLENAR TODOS LOS CAMPOS", Toast.LENGTH_LONG).show();
         }else{
 
-            //Sucursal s = new Sucursal(this);
+            Sucursal s = new Sucursal();
             SQLiteDatabase db = bdd.getWritableDatabase();
             comuna_nombre = comuna.getSelectedItem().toString();
             direccion_nombre = direccion.getText().toString();
@@ -52,15 +52,15 @@ public class BuscarPorSucursal extends AppCompatActivity {
             /*Toast.makeText(getApplicationContext(), "DIRECCION: "+direccion_nombre+" COMUNA: "+
                     comuna_nombre, Toast.LENGTH_LONG).show();*/
 
-            if(bdd.verificarSiExisteSucursal(db, direccion_nombre, comuna_nombre).getCount()==0){
+            if(s.verificarSiExisteSucursal(db, direccion_nombre, comuna_nombre).getCount()==0){
                 Toast.makeText(getApplicationContext(), "NO EXISTE SUCURSAL DE ACUERDO A LOS DATOS INGRESADOS",
                         Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(getApplicationContext(), "SI COINCIDEN DATOS", Toast.LENGTH_LONG).show();
                 List<String> datosIngresados;
                 datosIngresados = new ArrayList<String>();
-                datosIngresados.add(comuna.getSelectedItem().toString());
-                datosIngresados.add(direccion.getText().toString());
+                datosIngresados.add(comuna_nombre);
+                datosIngresados.add(direccion_nombre);
 
                 Intent intent = new Intent(this, DesplegarInformacion.class);
                 intent.putStringArrayListExtra("test", (ArrayList<String>) datosIngresados);

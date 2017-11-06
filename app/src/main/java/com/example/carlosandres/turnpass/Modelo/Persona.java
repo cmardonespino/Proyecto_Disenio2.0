@@ -12,14 +12,7 @@ public class Persona {
     String fecha_nacimiento="";
     String genero = "";
 
-    public Persona(String nom, String r, String t, int e, String fn, String g){
-        this.nombre_completo=nom;
-        this.RUN = r;
-        this.telefono=t;
-        this.edad=e;
-        this.fecha_nacimiento=fn;
-        this.genero=g;
-    }
+    public Persona(){}
 
     public String getNombre_completo() {
         return nombre_completo;
