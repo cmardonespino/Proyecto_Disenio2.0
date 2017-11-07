@@ -56,10 +56,21 @@ public class MainActivity extends AppCompatActivity {
         bdd = new BaseDeDatos(this);
 
         if(BaseDeDatos.doesDatabaseExist(this, BaseDeDatos.DATABASE_NAME)==false){
-            basededatos = bdd.getWritableDatabase();
+            basededatos = bdd.getWritableDatabase(); //crea base de datos si no existe
 
-            ContentValues values = new ContentValues();
-            values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 10);
+            if( bdd.poblarTablaServicio(basededatos, 10, "Pasaporte")==true){
+                if(bdd.poblarTablaServicio(basededatos, 11, "Carnet")==true){
+                    if(bdd.poblarTablaDiscapacidad(basededatos, "2", "Fisica")==true){
+                        if(bdd.poblarTablaDiscapacidad(basededatos, "1", "Sensorial")==true){
+                            if(bdd.poblarTablaDiscapacidad(basededatos, "0", "Ninguna")==true){
+                                Toast.makeText(getApplicationContext(), "Tablas principales pobladas correctamente", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                }
+            }
+            //ContentValues values = new ContentValues();
+            /*values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 10);
             values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_NOMBRE, "Pasaporte");
             basededatos.insert(BaseDeDatos.Servicio.TABLE_NAME, null, values);
             values.clear();
@@ -68,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
             values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_ID, 11);
             values.put(BaseDeDatos.Servicio.COLUM_SERVICIO_NOMBRE, "Carnet");
             basededatos.insert(BaseDeDatos.Servicio.TABLE_NAME, null, values);
-            values.clear();
+            values.clear();*/
 
+            /*
             basededatos = bdd.getWritableDatabase();
             values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NIVELPRIORIDAD, "2");
             values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NOMBRE, "Fisica");
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NIVELPRIORIDAD, "0");
             values.put(BaseDeDatos.Discapacidad.COLUM_DISCAPACIDAD_NOMBRE, "Ninguna");
             basededatos.insert(BaseDeDatos.Discapacidad.TABLE_NAME, null, values);
-            values.clear();
+            values.clear();*/
         }
 
         super.onCreate(savedInstanceState);

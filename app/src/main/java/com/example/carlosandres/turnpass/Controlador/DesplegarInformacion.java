@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.carlosandres.turnpass.Modelo.BaseDeDatos;
 import com.example.carlosandres.turnpass.Modelo.Servicio;
 import com.example.carlosandres.turnpass.Modelo.Sucursal;
+import com.example.carlosandres.turnpass.Modelo.Turno;
 import com.example.carlosandres.turnpass.Modelo.Usuario;
 import com.example.carlosandres.turnpass.R;
 
@@ -106,34 +107,53 @@ public class DesplegarInformacion extends AppCompatActivity {
             TextView c = (TextView)findViewById(R.id.discapacidadSucursal);
             String discapacidad = c.getText().toString();
 
+
             datosIngresados.add(nombre);
             datosIngresados.add(servicio);
             datosIngresados.add(discapacidad);
 
-            intent.putStringArrayListExtra("test", (ArrayList<String>) datosIngresados);
-            startActivity(intent);
+            Usuario usuario = new Usuario();
+            BaseDeDatos bdd = new BaseDeDatos(this);
+            SQLiteDatabase db = bdd.getWritableDatabase();
+            //Cursor solicitarTurno = usuario.solicitarAsignarTurno(db, "186740645");
+            if(usuario.solicitarAsignarTurno(db, "186740645").getCount()<1){
+                intent.putStringArrayListExtra("test", (ArrayList<String>) datosIngresados);
+
+                Turno t = new Turno();
+                datosIngresados = getIntent().getStringArrayListExtra("test");
+
+                Sucursal s = new Sucursal();
+                ArrayList<Sucursal> sucursal = new ArrayList<Sucursal>();
+                sucursal = s.capturarDatos(db, datosIngresados.get(1), datosIngresados.get(0));
+                if(sucursal.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "PROBLEMAS AL CAPTURAR DATOS", Toast.LENGTH_LONG).show();
+                }else{
+                    String nom = sucursal.get(0).getNombre_sucursal();
+                    String dir = sucursal.get(0).getDireccion();
+                    String ser = sucursal.get(0).getServicio();
+                    Toast.makeText(getApplicationContext(), nom+" "+dir+" "+ser, Toast.LENGTH_LONG).show();
+                    // COMUNA Y LUEGO DIRECCION
+                    //Toast.makeText(getApplicationContext(), datosIngresados.get(0).toString()+" "+datosIngresados.get(1).toString(), Toast.LENGTH_LONG).show();
+                    if(t.asignarTurno(db,"186740645", nombre, ser)==true){
+                        List<String> datosIngresados3;
+                        datosIngresados3 = new ArrayList<String>();
+                        datosIngresados3.add("01");
+                        datosIngresados3.add("60 segundos");
+                        datosIngresados3.add(ser);
+                        datosIngresados3.add(nom);
+                        datosIngresados3.add("00");
+                        Intent intent2 = new Intent(this, MostrarTurnoTomado.class);
+                        intent2.putStringArrayListExtra("test1", (ArrayList<String>) datosIngresados3);
+                        startActivity(intent2);
+                    }else
+                        Toast.makeText(getApplicationContext(), "PROBLEMAS AL ASIGNAR TURNO", Toast.LENGTH_LONG).show();
+                }
+            }else{
+                Toast.makeText(getApplicationContext(), "USUARIO YA TIENE UN TURNO ASIGNADO", Toast.LENGTH_LONG).show();
+            }
 
         }else{
             Toast.makeText(getApplicationContext(), "DEBE SELECCIONAR UNA SUCURSAL PARA SOLICITAR TURNO", Toast.LENGTH_LONG).show();
         }
-        /*
-        if(rs.moveToFirst()){
-            do{
-                int columna = rs.getColumnCount();
-                for(int i =0;i<columna;++i){
-                    if(i%6==0){
-                        sb.append(" / ");
-                    }
-                    sb.append(rs.getString(i));
-                    if(i<columna-1)
-                        sb.append(" - ");
-                }
-                //Toast.makeText(getApplicationContext(), sb.toString(), Toast.LENGTH_LONG).show();
-            }while(rs.moveToNext());
-            Toast.makeText(getApplicationContext(), sb.toString(), Toast.LENGTH_LONG).show();
-            //str = rs.getString(rs.getColumnIndex("ID"));
-            //Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG).show();
-            //rs.move(1);
-        }*/
     }
 }

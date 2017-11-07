@@ -1,5 +1,6 @@
 package com.example.carlosandres.turnpass.Modelo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -176,5 +177,31 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public static boolean doesDatabaseExist(Context context, String dbName) {
         File dbFile = context.getDatabasePath(dbName);
         return dbFile.exists();
+    }
+
+    public boolean poblarTablaDiscapacidad(SQLiteDatabase db, String nivelPrioridad, String discapacidadNombre){
+        try{
+            ContentValues values = new ContentValues();
+            values.put(Discapacidad.COLUM_DISCAPACIDAD_NIVELPRIORIDAD, nivelPrioridad);
+            values.put(Discapacidad.COLUM_DISCAPACIDAD_NOMBRE, discapacidadNombre);
+            db.insert(Discapacidad.TABLE_NAME, null, values);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean poblarTablaServicio(SQLiteDatabase db, int idservicio, String nombreServicio){
+        try{
+            ContentValues values = new ContentValues();
+            /*db.execSQL("INSERT INTO "+BaseDeDatos.Turno.TABLE_NAME+" (ID_USUARIO, NOMBRE_TURNO, ID_SERVICIO) VALUES("+
+                    run+", "+nombreSucursal+", "+servicioSucursal+")");*/
+            values.put(Servicio.COLUM_SERVICIO_ID, idservicio);
+            values.put(Servicio.COLUM_SERVICIO_NOMBRE, nombreServicio);
+            db.insert(BaseDeDatos.Servicio.TABLE_NAME, null, values);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

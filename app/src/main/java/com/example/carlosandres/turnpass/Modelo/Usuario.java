@@ -63,4 +63,9 @@ public class Usuario{
         return usuario;
 
     }
+
+    public Cursor solicitarAsignarTurno(SQLiteDatabase db, String run){
+        ArrayList<Usuario> usuario = new ArrayList<Usuario>();
+        return db.rawQuery("SELECT * FROM Turno WHERE ID_USUARIO='"+run+"'", null);
+    }
 }

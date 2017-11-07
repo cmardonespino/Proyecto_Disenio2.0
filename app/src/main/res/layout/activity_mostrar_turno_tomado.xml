@@ -57,7 +57,8 @@
                         android:text="Su Turno" />
 
                     <TextView
-                        android:layout_width="50dp"
+                        android:id="@+id/SuTurno"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
@@ -75,8 +76,8 @@
                         android:text="Tiempo Estimado" />
 
                     <TextView
-                        android:id="@+id/servicioSucursal"
-                        android:layout_width="50dp"
+                        android:id="@+id/editTextTiempoEstimado"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
@@ -94,8 +95,8 @@
                         android:text="Servicio" />
 
                     <TextView
-                        android:id="@+id/servicioSucursal2"
-                        android:layout_width="50dp"
+                        android:id="@+id/editTextServicio"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
@@ -112,7 +113,8 @@
                         android:text="Sucursal" />
 
                     <TextView
-                        android:layout_width="50dp"
+                        android:id="@+id/editTextSucursal"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
@@ -129,7 +131,8 @@
                         android:text="Turno del servicio" />
 
                     <TextView
-                        android:layout_width="50dp"
+                        android:id="@+id/editTextTurnoDelServicio"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
