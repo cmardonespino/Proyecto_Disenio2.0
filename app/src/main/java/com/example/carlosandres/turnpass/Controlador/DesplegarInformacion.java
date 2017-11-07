@@ -61,7 +61,7 @@ public class DesplegarInformacion extends AppCompatActivity {
             Servicio s1 = new Servicio();
 
             ArrayList<Servicio> b1 = new ArrayList<Servicio>();
-            Toast.makeText(getApplicationContext(), sucursal.get(0).getServicio(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), sucursal.get(0).getServicio(), Toast.LENGTH_LONG).show();
             b1 = s1.consultarServicio(db, sucursal.get(0).getServicio());
             b.setText(b1.get(0).getNombre_servicio());
             //Toast.makeText(getApplicationContext(), b1.get(0).getNombre_servicio(), Toast.LENGTH_LONG).show();

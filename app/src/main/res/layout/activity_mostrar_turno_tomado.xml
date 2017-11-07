@@ -6,21 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.example.carlosandres.turnpass.Controlador.MostrarTurnoTomado">
 
-    <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="113dp"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="131dp"
+        android:layout_height="130dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.063"
+        app:srcCompat="@drawable/logo" />
 
-        <ScrollView
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="168dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -28,7 +42,7 @@
                 android:id="@+id/linearLayoutMostrarDatos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/linearLayoutMostrarDatosEspecificos"
@@ -37,46 +51,16 @@
 
                     <TextView
                         android:id="@+id/primero"
-                        android:layout_width="110dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Nombre Sucursal" />
+                        android:text="Su Turno" />
 
                     <TextView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Servicio" />
-
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Dirección" />
-
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Comuna" />
-
-                    <TextView
-                        android:layout_width="90dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Discapacidad" />
-
-                    <TextView
-                        android:layout_width="90dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Módulos" />
-
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Selecciona" />
+                        android:text="" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -85,10 +69,10 @@
 
                     <TextView
                         android:id="@+id/nombreSucursal"
-                        android:layout_width="110dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="" />
+                        android:text="Tiempo Estimado" />
 
                     <TextView
                         android:id="@+id/servicioSucursal"
@@ -96,47 +80,97 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/direccionSucursal"
-                        android:layout_width="70dp"
+                        android:id="@+id/nombreSucursal2"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Servicio" />
+
+                    <TextView
+                        android:id="@+id/servicioSucursal2"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/comunaSucursal"
-                        android:layout_width="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Sucursal" />
+
+                    <TextView
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/discapacidadSucursal"
-                        android:layout_width="90dp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Turno del servicio" />
+
+                    <TextView
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="" />
-
-                    <TextView
-                        android:id="@+id/modulosSucursal"
-                        android:layout_width="90dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="" />
-
-                    <CheckBox
-                        android:id="@+id/checkBoxSeleccionar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp" />
                 </LinearLayout>
 
             </LinearLayout>
 
 
-        </ScrollView>
+        </HorizontalScrollView>
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Actualizar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.917" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Cancelar Turno"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.917" />
 </android.support.constraint.ConstraintLayout>
